@@ -1,0 +1,28 @@
+name: Deploy app to heroku
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
+          heroku_email: "abayomexy@gmail.com"
+          procfile: web: node build/server.js
+        env:
+          HD_NODE_ENV: ${{secrets.NODE_ENV}}
+          HD_JWT_SECRET: ${{secrets.JWT_SECRET}}
+          HD_JWT_EXPIRY: ${{secrets.JWT_EXPIRY}}
+          HD_ORIGIN: ${{secrets.ORIGIN}}
+          HD_CLOUDINARY_NAME: ${{secrets.CLOUDINARY_NAME}}
+          HD_CLOUDINARY_KEY: ${{secrets.CLOUDINARY_KEY}}
+          HD_CLOUDINARY_SECRET: ${{secrets.CLOUDINARY_SECRET}}
+          HD_PORT: ${{secrets.PORT}}
+          HD_DATABASE_URL: ${{secrets.DATABASE_URL}}
