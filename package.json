@@ -23,6 +23,7 @@
   "scripts": {
     "dev": "nodemon --exec ts-node src/server.ts",
     "postinstall": "tsc",
+    "ck": "NO IMPORTANT ",
     "build": "tsc --build",
     "start": "node build/server.js",
     "test": "env-cmd -f ./test.env jest --watchAll --runInBand"
