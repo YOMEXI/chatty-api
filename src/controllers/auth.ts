@@ -103,7 +103,7 @@ const login = asyncHandler(
       cookie.serialize("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 360000,
         path: "/",
       })
