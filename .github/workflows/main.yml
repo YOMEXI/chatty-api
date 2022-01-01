@@ -23,5 +23,4 @@ jobs:
           HD_ORIGIN: ${{secrets.ORIGIN}}
           HD_API_KEY: ${{secrets.API_KEY}}
           HD_API_SECRET: ${{secrets.API_SECRET}}
-          HD_PORT: ${{secrets.PORT}}
           HD_DATABASE_URL: ${{secrets.DATABASE_URL}}
