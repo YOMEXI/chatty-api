@@ -23,8 +23,9 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: true,
+    origin: process.env.ORIGIN,
     optionsSuccessStatus: 200,
+    exposedHeaders: ["Set-Cookie"],
   })
 );
 
