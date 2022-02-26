@@ -98,11 +98,11 @@ const login = asyncHandler(
     user.password = undefined;
 
     //
-    res.set(
-      "Set-Cookie",
+    res.cookie(
+      "token",
       cookie.serialize("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        httpOnly: process.env.NODE_ENV ? true : false,
+        secure: process.env.NODE_ENV === "production" ? true : false,
         sameSite: "none",
         maxAge: 360000,
         path: "/",
@@ -119,17 +119,19 @@ const login = asyncHandler(
 const authorize = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     let token: string;
+    let finalToken;
 
-    if (req.headers.cookie) {
-      token = req.headers.cookie.split("=")[1];
+    if (req.cookies) {
+      token = req.cookies.token.split("=")[1];
+      finalToken = token.split(";")[0];
     }
 
-    if (!token) {
+    if (!finalToken) {
       res.status(401);
       throw new Error("Please Log In  ....");
     }
 
-    const { email }: any = jwt.verify(token, process.env.JWT_SECRET);
+    const { email }: any = jwt.verify(finalToken, process.env.JWT_SECRET);
     const stillTheUser = await User.findOne({ email });
 
     if (!stillTheUser) {
