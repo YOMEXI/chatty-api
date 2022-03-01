@@ -1,7 +1,13 @@
-# Awesome Project Build with TypeORM
+A simple social media application api
 
-Steps to run this project:
+Built with 
+Expressjs, Mongodb, socket.io
 
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+Functionalities includes:
+
+1) Cookies authentication with JWT.
+2) Post create, read, update, delete
+3) Like and Unlike, Follow and unfollow
+4) real time chat socket.io
+5) Comment Crud
+
